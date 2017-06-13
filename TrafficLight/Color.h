@@ -1,0 +1,10 @@
+#pragma once
+
+enum Color {
+	COLOR_BLACK = 0,
+	COLOR_GREEN = 2,
+	COLOR_RED = 4,
+	COLOR_DARKGRAY = 8,
+	COLOR_YELLOW = 14,
+	COLOR_WHITE = 15
+};
