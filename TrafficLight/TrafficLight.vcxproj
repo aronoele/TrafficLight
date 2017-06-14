@@ -29,6 +29,7 @@
     <ClInclude Include="TrafficLightStateGreen.h" />
     <ClInclude Include="TrafficLightStateRed.h" />
     <ClInclude Include="TrafficLightStateTurnOff.h" />
+    <ClInclude Include="TrafficLightStateWriter.h" />
     <ClInclude Include="TrafficLightStateYellow.h" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +39,7 @@
     <ClCompile Include="TrafficLightStateGreen.cpp" />
     <ClCompile Include="TrafficLightStateRed.cpp" />
     <ClCompile Include="TrafficLightStateTurnOff.cpp" />
+    <ClCompile Include="TrafficLightStateWriter.cpp" />
     <ClCompile Include="TrafficLightStateYellow.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

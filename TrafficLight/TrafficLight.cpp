@@ -10,6 +10,7 @@
 #include "TrafficLightStateRed.h"
 #include "TrafficLightStateYellow.h"
 #include "TrafficLightStateGreen.h"
+#include "TrafficLightStateWriter.h"
 
 using namespace std;
 
@@ -82,40 +83,24 @@ void TrafficLight::draw()
 	SetConsoleTextAttribute(handle, COLOR_WHITE);
 	cout << "\n\tS - Start\n" <<
 		"\tP - Pause\n" <<
-		"\tE -Exit\n";
-}
-
-void TrafficLight::write(const string& str)
-{
-	const char* note = str.c_str();
-	struct tm currentTime;
-	time_t now = time(0);
-	localtime_s(&currentTime, &now);
-	char noteTime[26];
-	asctime_s(noteTime, sizeof noteTime, &currentTime);
-
-	ofstream out("log.txt", ios::out | ios::app);
-	if (!out.is_open()) {
-		cout << "Writting error\n";
-	}
-	out << note << '\t' << noteTime << endl;
-	out.close();
+		"\tE - Exit\n";
 }
 
 bool TrafficLight::isWorking(int interval)
 {
 	int timer = 100;
 	int time = 100;
+	TrafficLightStateWriter log;
 	while (time < interval) {
 		if (_kbhit()) {
-			int charCode = _getch();//int code = static_cast<int>(charCode);
+			int charCode = _getch();
 			switch (charCode) {
 			case 69://e
 			case 101:
 				return false;
 			case 80://p
 			case 112:
-				write("PAUSE");
+				log.write("PAUSE");
 				cout << "\tPause\n";
 				while (true) {
 					if (_kbhit()) {
@@ -126,7 +111,7 @@ bool TrafficLight::isWorking(int interval)
 							return false;
 						case 83://s
 						case 115:
-							write("START");
+							log.write("START");
 							return true;
 						}
 					}
@@ -142,24 +127,24 @@ bool TrafficLight::isWorking(int interval)
 void TrafficLight::exit()
 {
 	setTurnOffState();
-	write("EXIT");
+	TrafficLightStateWriter log;
+	log.write("EXIT");
 	draw();
 	cout << "\tExit\n";
 }
 
 void TrafficLight::work()
 {
-	write("START");
+	TrafficLightStateWriter log;
+	log.write("START");
 	while (true) {
 		setState(new TrafficLightStateRed());
-		write("RED");
 		draw();
 		if (!isWorking(intervalRed_)) {
 			exit();
 			return;
 		}
 		setState(new TrafficLightStateGreen());
-		write("GREEN");
 		draw();
 		if (!isWorking(intervalGreen_)) {
 			exit();
@@ -170,7 +155,6 @@ void TrafficLight::work()
 			draw();
 			Sleep(intervalBlinking_);
 			setState(new TrafficLightStateYellow());
-			write("YELLOW");
 			draw();
 			if (!isWorking(intervalBlinking_)) {
 				exit();

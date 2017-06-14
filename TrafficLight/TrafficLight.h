@@ -6,9 +6,9 @@
 #include "ITrafficLight.h"
 #include "ITrafficLightState.h"
 #include "ITrafficLightWorkCheck.h"
-#include "IWritable.h"
+//#include "IWritable.h"
 
-class TrafficLight : public ITrafficLight, ITrafficLightWorkCheck, IWritable
+class TrafficLight : public ITrafficLight, ITrafficLightWorkCheck//, IWritable
 {
 public:
 	TrafficLight();
@@ -24,7 +24,7 @@ public:
 	void setGreenState() override;
 	void setTurnOffState() override;
 	void draw();
-	void write(const std::string& str) override;
+	//void write(const std::string& str) override;
 	bool isWorking(int interval) override;
 	void work();
 	void exit();

@@ -48,6 +48,9 @@
     <ClInclude Include="ITrafficLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TrafficLightStateWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLightStateWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
